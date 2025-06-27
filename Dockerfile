@@ -28,10 +28,8 @@ RUN set -eux; \
   chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
   rustup --version; \
   cargo --version; \
-  rustc --version; \
-  rustup target add x86_64-pc-windows-gnu
+  rustc --version;
 
-ENV MINGW64_OPENSSL_FILE=mingw-w64-x86_64-openssl-3.5.0-1-any.pkg.tar.zst
 ENV VERSION_MANAGER_VERION=3.0.0
 ENV COCOGITTO_VERSION=6.3.0
 
@@ -39,27 +37,19 @@ RUN apk add --no-cache \
   build-base \
   curl \
   git \
-  mingw-w64-gcc \
-  mingw-w64-binutils \
   musl-dev \
   openssh-client-default \
   openssl-dev \
   openssl-libs-static \
   zstd 
 
-RUN curl -fsSLO https://repo.msys2.org/mingw/mingw64/${MINGW64_OPENSSL_FILE} 
-
 RUN curl -fsSLO https://github.com/annie444/version/releases/download/v${VERSION_MANAGER_VERION}/version-v${VERSION_MANAGER_VERION}-x86_64-unknown-linux-musl.tar.gz
 
 RUN curl -fsSLO https://github.com/cocogitto/cocogitto/releases/download/${COCOGITTO_VERSION}/cocogitto-${COCOGITTO_VERSION}-x86_64-unknown-linux-musl.tar.gz
 
-RUN unzstd < ${MINGW64_OPENSSL_FILE} | tar -C /opt --exclude '.BUILDINFO' --exclude '.MTREE' --exclude '.PKGINFO' --exclude 'mingw64/bin' --exclude 'mingw64/etc' --exclude 'mingw64/share' -xvf -
-
 RUN tar -xzf version-v${VERSION_MANAGER_VERION}-x86_64-unknown-linux-musl.tar.gz -C /opt
 
 RUN tar -xzf cocogitto-${COCOGITTO_VERSION}-x86_64-unknown-linux-musl.tar.gz -C /opt
-
-RUN mv -v /opt/mingw64 /opt/mingw64-openssl
 
 RUN mv -v /opt/x86_64-unknown-linux-musl /opt/cocogitto
 
