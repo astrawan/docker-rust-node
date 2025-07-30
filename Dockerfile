@@ -41,6 +41,7 @@ RUN apk add --no-cache \
   openssh-client-default \
   openssl-dev \
   openssl-libs-static \
+  tar \
   zstd 
 
 RUN curl -fsSLO https://github.com/annie444/version/releases/download/v${VERSION_MANAGER_VERION}/version-v${VERSION_MANAGER_VERION}-x86_64-unknown-linux-musl.tar.gz
