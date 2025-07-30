@@ -34,6 +34,7 @@ ENV VERSION_MANAGER_VERION=3.0.0
 ENV COCOGITTO_VERSION=6.3.0
 
 RUN apk add --no-cache \
+  bash \
   build-base \
   curl \
   git \
