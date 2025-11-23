@@ -40,4 +40,4 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ env.OWNER_LC }}/rust-node:1.0.1
+            ghcr.io/${{ env.OWNER_LC }}/rust-node:1.0.2
