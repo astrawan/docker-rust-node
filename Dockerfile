@@ -1,6 +1,10 @@
-FROM node:22.17-alpine
+FROM node:24.11.1-alpine
 
 LABEL org.opencontainers.image.source=https://github.com/astrawan/docker-rust-node
+
+# install pnpm
+RUN corepack enable pnpm
+RUN corepack use pnpm@latest-10
 
 # origin: https://github.com/rust-lang/docker-rust
 RUN apk add --no-cache \
@@ -10,7 +14,7 @@ RUN apk add --no-cache \
 ENV RUSTUP_HOME=/usr/local/rustup \
   CARGO_HOME=/usr/local/cargo \
   PATH=/usr/local/cargo/bin:$PATH \
-  RUST_VERSION=1.88.0
+  RUST_VERSION=1.91.1
 
 RUN set -eux; \
   apkArch="$(apk --print-arch)"; \
@@ -31,7 +35,7 @@ RUN set -eux; \
   rustc --version;
 
 ENV VERSION_MANAGER_VERION=3.0.0
-ENV COCOGITTO_VERSION=6.3.0
+ENV COCOGITTO_VERSION=6.5.0
 
 RUN apk add --no-cache \
   bash \
